@@ -10,4 +10,4 @@ class MathUtility {
 
 console.log(MathUtility.calculateArea(5)); 
 console.log(MathUtility.totalCalculations); 
-// const m = new MathUtility(); // Can call static without new
+// const m = new MathUtility(); 
