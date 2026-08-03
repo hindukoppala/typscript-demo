@@ -1,26 +1,31 @@
-class Animal {
-  protected species: string;
-  private dna: string = "ATCG";
+class Employee {
+  // Accessible inside Employee and any child classes
+  protected baseSalary: number; 
 
-  constructor(species: string) {
-    this.species = species;
+  constructor(baseSalary: number) {
+    this.baseSalary = baseSalary;
   }
 }
 
-class Dog extends Animal {
-  private breed: string;
+class Manager extends Employee {
+  private bonus: number;
 
-  constructor(species: string, breed: string) {
-    super(species);
-    this.breed = breed;
+  constructor(baseSalary: number, bonus: number) {
+    super(baseSalary); // Pass value to parent constructor
+    this.bonus = bonus;
   }
 
-  public makeNoise(): string {
-    // Accessible because it is protected
-    return `${this.species} barks!`; 
-    // console.log(this.dna); // Error: Property 'dna' is private
+  public getCalculatePayout(): number {
+    // Legal: Can access 'baseSalary' because Manager is a subclass
+    return this.baseSalary + this.bonus; 
   }
 }
 
-const myDog = new Dog("Canine", "Golden Retriever");
-console.log(myDog.makeNoise());
+// --- Usage ---
+const manager = new Manager(50000, 10000);
+
+console.log(manager.getCalculatePayout()); // Outputs: 60000 (Legal)
+
+// Error: Property 'baseSalary' is protected and only accessible 
+// within class 'Employee' and its subclasses.
+console.log(manager.baseSalary); 
